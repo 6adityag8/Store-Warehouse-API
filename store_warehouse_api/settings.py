@@ -68,8 +68,26 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'db_store': {
+        'ENGINE': env.str('DB_STORE_ENGINE', default='django.db.backends.sqlite3'),
+        'NAME': env.str('DB_STORE_NAME', default=BASE_DIR / 'db_store.sqlite3'),
+        'USER': env.str('DB_STORE_USER', default=''),
+        'PASSWORD': env.str('DB_STORE_PASSWORD', default=''),
+        'HOST': env.str('DB_STORE_HOST', default=''),
+        'PORT': env.str('DB_STORE_PORT', default=''),
+    },
+    'db_warehouse': {
+        'ENGINE': env.str('DB_WAREHOUSE_ENGINE', default='django.db.backends.sqlite3'),
+        'NAME': env.str('DB_WAREHOUSE_NAME', default=BASE_DIR / 'db_warehouse.sqlite3'),
+        'USER': env.str('DB_WAREHOUSE_USER', default=''),
+        'PASSWORD': env.str('DB_WAREHOUSE_PASSWORD', default=''),
+        'HOST': env.str('DB_WAREHOUSE_HOST', default=''),
+        'PORT': env.str('DB_WAREHOUSE_PORT', default=''),
+    },
 }
+
+DATABASE_ROUTERS = ['store_warehouse_api.router.DBRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
