@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import WarehouseOrder
+
+
+@admin.register(WarehouseOrder)
+class WarehouseOrderAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request, obj=None):
+        return False
