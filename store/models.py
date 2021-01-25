@@ -1,11 +1,6 @@
 from django.db import models
 
-STATUS_CHOICES = (
-    ('0', 'New'),
-    ('1', 'In Process'),
-    ('2', 'Stored'),
-    ('3', 'Send'),
-)
+from store_warehouse_api.constants import STATUS_CHOICES
 
 
 class StoreOrder(models.Model):
