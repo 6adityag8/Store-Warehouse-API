@@ -8,4 +8,4 @@ class WarehouseOrder(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='0')
 
     def __str__(self):
-        return str(self.order_number)
+        return 'Warehouse Order: {0} - {1}'.format(str(self.order_number), str(self.status))
