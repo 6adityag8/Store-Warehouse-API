@@ -32,13 +32,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip3 install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Run migrate commands
+# Run migration commands
+RUN python manage.py makemigrations
 RUN python manage.py migrate --database=db_store store
 RUN python manage.py migrate --database=db_warehouse warehouse
 RUN python manage.py migrate --no-input
 
+# Run collectstatic command
+RUN python manage.py collectstatic --no-input
+
 # Run createsuperuser command
-RUN python manage.py createsuperuser --noinput
+RUN python manage.py createsuperuser --no-input
 
 EXPOSE 8888
 CMD python manage.py runserver 0.0.0.0:$PORT
