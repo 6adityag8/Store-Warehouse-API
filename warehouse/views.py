@@ -1,14 +1,23 @@
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, get_object_or_404, CreateAPIView
 
+from .models import WarehouseOrder
 from .serializers import WarehouseOrderSerializer
 
 
-@api_view(['POST'])
-def add_warehouse(request):
-    serializer = WarehouseOrderSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class WarehouseCreateView(CreateAPIView):
+    """
+    Creates a new Warehouse Order.
+    """
+    serializer_class = WarehouseOrderSerializer
+
+
+class WarehouseUpdateDeleteView(RetrieveUpdateDestroyAPIView):
+    """
+    Updates the warehouse order if method is PATCH
+    and deletes the order if method is DELETE.
+    """
+    serializer_class = WarehouseOrderSerializer
+    queryset = WarehouseOrder.objects.all()
+
+    def get_object(self):
+        return get_object_or_404(WarehouseOrder.objects, order_number=self.kwargs['order_number'])
