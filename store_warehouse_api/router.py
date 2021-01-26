@@ -31,7 +31,7 @@ class DBRouter:
         Allow relations if a model in the store or warehouse apps is
         involved.
         """
-
+        # TODO: this can be written using all()/any()
         if obj1._meta.app_label == 'store' or obj2._meta.app_label == 'store':
             return True
         elif 'store' not in [obj1._meta.app_label, obj2._meta.app_label]:
