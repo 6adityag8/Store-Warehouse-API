@@ -6,7 +6,6 @@ from warehouse import urls as warehouse_url
 
 urlpatterns = [
     path('', admin.site.urls),
-    path('admin/', admin.site.urls),
     path('store/', include(store_url)),
     path('warehouse/', include(warehouse_url)),
 ]
