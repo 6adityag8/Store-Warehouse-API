@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env.str('SECRET_KEY', default=secrets.token_hex(24))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=True)
+DEBUG = env.bool('DEBUG', default=False)
 
 # Please specify comma-separated string in .env file
 ALLOWED_HOSTS = env.str('ALLOWED_HOSTS', default='*').split()
